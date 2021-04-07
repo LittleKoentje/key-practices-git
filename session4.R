@@ -1,19 +1,38 @@
-# 1. Set up your project by loading your packages, e.g.:
+#----------Header-----------#
+# date:         07.04.2021
+# author:       Teun van Gils
+# editor:       Koen de Reus (koen.dereus@mpi.nl)
+# filename:     session4.R
+# description:  Explores data and performs an analysis of variance (ANOVA)
+# project:      Key Practices for a Language Scientist IMPRS course
+
+#----------
+
+#-------Change log---------#
+# Modified on 07.04.2021
+# Adapt script to ensure best R practices
+
+#----------
+
+#-------Library declaration------#
 library(package)
 
-# 2. Set the working directory and load the data, e.g.:
+#----------
+#-------Set directory and load data-----#
 setwd("directory")
 data <- read.delim("data.csv", header = TRUE, sep = ",")
 
-# 3. Make variables ready to work on, e.g.:
+#-------Data preparation and exploration---------#
 data <- data %>%
   select(ppID, condition, trial, RT) %>%
   mutate(condition = as.factor(condition), target = as.factor(target))
+
+#Remove NAs
 data <- na.omit(data)
 
-# 4. Explore data, e.g.:
+#Explore data
 summary(data)
 
-# 5. Analysis (can be a simple analysis), e.g. a one-way ANOVA, within-subjects:
+#--------Data analysis--------#
 anovaRTbycategory <- aov(RT ~category+error(ppID/category), data = analysis_anova)
 summary(anovaRTbycategory)
